@@ -11,10 +11,10 @@ In this demo we run a rosjava node to tests the freertps library.
 # How to build
 
 1. Copy the freertps library into `src/androidpkg1/androidp1/src/main/jni/static_lib/libfreertps_lib.a`
-2. Edit the file `/home/ecorbellini/repos/ernesto/freertps_android_test/src/androidpkg1/local.properties`
+2. Edit the file `src/androidpkg1/local.properties`
 and set the `ndk.dir` variable to the path where the Android NDK is
 installed on your system.
-3. In the root of the project run ```catkin_make```
+3. In the root of the project run `catkin_make`
 4. If everthing went well you should have the compiled Android package
 located in `src/androidpkg1/androidp1/build/outputs/apk/androidp1-debug.apk`
 
