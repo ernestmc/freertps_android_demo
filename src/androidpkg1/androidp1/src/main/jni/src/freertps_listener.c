@@ -3,6 +3,13 @@
 #include "freertps/freertps.h"
 #include "freertps_listener.h"
 
+#include <android/log.h>
+
+#define APP_TAG "Androidp1"
+
+#define log_error(...) __android_log_print(ANDROID_LOG_ERROR, APP_TAG, __VA_ARGS__)
+#define log_debug(...) __android_log_print(ANDROID_LOG_DEBUG, APP_TAG, __VA_ARGS__)
+
 
 void chatter_cb(const void *msg)
 {
@@ -11,6 +18,7 @@ void chatter_cb(const void *msg)
   for (int i = 0; i < str_len && i < sizeof(buf)-1; i++)
     buf[i] = ((uint8_t *)msg)[4+i];
   //printf("I heard: [%s]\n", buf);
+  log_debug("I heard: [%s]\n", buf);
 }
 
 void f1(void)
@@ -32,6 +40,7 @@ void f1(void)
     *str_len_ptr = rtps_string_len;
     freertps_publish(pub, (uint8_t *)msg, rtps_string_len + 4);
     //printf("sending: [%s]\r\n", &msg[4]);
+    log_debug("sending: [%s]\r\n", &msg[4]);
   }
   frudp_fini();
   //return 0;
@@ -54,6 +63,8 @@ JNIEXPORT jint JNICALL Java_com_github_rosjava_android_androidp1_FreeRTPSListene
     frudp_disco_tick();
   }
   frudp_fini();*/
+  
+  log_debug("Starting freertps_listener.");
   f1();
   return 0;
 }
